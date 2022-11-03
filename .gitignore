@@ -1,0 +1,28 @@
+#ignore built package
+dist
+
+# ignore local settings
+node_modules
+package-lock.json
+
+# track this file - .htaccess
+!src/.htaccess
+
+# track this file - ..gitignore
+!.gitignore
+
+# track gulp settings
+!gulpfile.js
+
+# ignore all files that start with ~
+~*
+
+# ignore unwanted OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+*[Tt]humbs.db
+*.Trashes
