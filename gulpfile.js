@@ -22,8 +22,8 @@ gulp.task('move', function () {
     return merge(assets, settings);
 });
 
-// run all tasks
-gulp.task('run', gulp.parallel('html', 'move'));
+// build package
+gulp.task('build', gulp.parallel('html', 'move'));
 
 // watch for changes
 gulp.task('watch', function () {
@@ -31,4 +31,4 @@ gulp.task('watch', function () {
 });
 
 // default task
-gulp.task('default', gulp.series('run', 'move', 'watch'));
+gulp.task('default', gulp.series('build', 'move', 'watch'));
