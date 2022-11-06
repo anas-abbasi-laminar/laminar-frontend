@@ -1,0 +1,28 @@
+<main>
+    
+    @@include('globals/_preloader.html')
+
+    <div class="cd-index cd-main-content">
+
+        <!-- Page Content -->
+        <div id="page-content" class="@@theme.content" data-bgcolor="@@theme.background_colour">
+            
+            @@include('globals/_top_navigation.html')
+            
+            <!-- Content Scroll -->
+            <div id="content-scroll">
+            
+                @@include('@@page.url')
+
+                @@include('globals/_bottom_navigation.html')
+        
+            </div>
+            <!--/Content Scroll -->
+            
+            <div id="app"></div>
+            
+        </div>    
+        <!--/Page Content -->
+
+    </div>
+</main>

@@ -152,10 +152,6 @@ Content Text Effects
 	opacity: 0.05;
 }
 
-.marquee-text.transparent-1 {
-	opacity: 0.1;
-}
-
 
 /*--------------------------------------------------
 Hover Reveal Image
@@ -2371,6 +2367,11 @@ Slowed Pin
 	height:auto;		
 	overflow: hidden;
 	z-index:0;
+}
+
+/* add */
+.slowed-images.transparent-25 {
+	opacity: 0.25;
 }
 
 .slowed-image-left {

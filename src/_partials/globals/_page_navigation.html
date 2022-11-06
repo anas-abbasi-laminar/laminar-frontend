@@ -1,0 +1,17 @@
+<!-- Page Navigation -->
+<div id="page-nav">
+    <div class="page-nav-wrap">
+        @@if (type === 'static') { <div class="page-nav-caption content-max-width block-title marquee-title1"> }
+        @@if (type === 'marquee') { <div class="page-nav-caption content-max-width block-title marquee-title"> }
+            <div class="inner">
+                <div class="hero-arrow"><i class="arrow-icon"></i></div>
+                <div class="next-hero-subtitle"><span>@@text.sub_title</span></div>
+                @@if (link.type === 'ajax') { <a class="page-title next-ajax-link-page" data-type="page-transition" data-firstline="@@text.hover.first_line" data-secondline="@@text.hover.second_line" href="@@link.url"> }
+                @@if (link.type === 'outbound') { <a class="link" data-firstline="@@text.hover.first_line" data-secondline="@@text.hover.second_line" href="@@link.url" target="_blank" rel="noreferrer"> }
+                    <div class="next-hero-title-wrapper"><div class="next-hero-title"><span>@@text.title</span></div></div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+<!--/Page Navigation -->
