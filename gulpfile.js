@@ -28,6 +28,8 @@ gulp.task('build', gulp.parallel('html', 'move'));
 // watch for changes
 gulp.task('watch', function () {
     gulp.watch('./src/**/*.html', gulp.series(['html', 'move']));
+    gulp.watch('./src/assets/css/**/*.css', gulp.series(['html', 'move']));
+    gulp.watch('./src/assets/js/**/*.js', gulp.series(['html', 'move']));
 });
 
 // default task

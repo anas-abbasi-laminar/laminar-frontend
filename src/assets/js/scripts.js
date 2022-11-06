@@ -4,7 +4,7 @@ jQuery(function ($) {
 		
 		"use strict";
 		
-		PageLoad(); 
+		PageLoad();
 		ScrollEffects();
 		Sliders();	 
 		FirstLoad(); 
@@ -35,8 +35,65 @@ Function CustomFunction
 	function CustomFunction() {
 		
 		//Add here your custom js code
+
+		if( $('body.home').length > 0 ) {
+			
+			fetchBlogs();
+
+		}
 		
-	}// End CustomFunction		
+	}// End CustomFunction
+
+	function fetchBlogs() {
+
+		// Make a request for a user with a given ID
+		axios.get('https://laminar-backend.herokuapp.com/api/posts', {
+			params: {
+				'filters[featured][$eq]': true,
+				'sort': 'publishedAt:DESC',
+				'fields[0]': 'title',
+				'fields[1]': 'publishedAt',
+				'populate[0]': 'cover',
+				'populate[1]': 'author.picture'
+			}
+		})
+		.then(function (response) {
+
+			// handle success
+			if( $('body.home').find('[data-trigger=fetch-blogs]').length > 0 ) {
+
+				var ctr = 1;
+
+				$.each(response.data.data, function(index, value) {
+
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') img').attr('src', value.attributes.cover.data.attributes.url + '?tr=w-512,h-512');
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') img').attr('alt', value.attributes.cover.data.attributes.alternativeText + '?tr=w-512,h-512');
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .post-categories li:nth-child(1) > a > span').attr('data-hover', value.attributes.author.data.attributes.name);
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .post-categories li:nth-child(1) > a > span').html(value.attributes.author.data.attributes.name);
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .post-categories li:nth-child(2) > a > time').attr('data-hover', value.attributes.publishedAt);
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .post-categories li:nth-child(2) > a > time').attr('datetime', value.attributes.publishedAt);
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .post-categories li:nth-child(2) > a > time').html(value.attributes.publishedAt);
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .post-categories li:nth-child(2) > a > time').timeago()
+					$('body.home').find('[data-trigger=fetch-blogs] > .panel:nth-child(' + ctr + ') .news-panel-title > span').html(value.attributes.title);
+
+					ctr++;
+
+					// $('body.home').find('[data-trigger=fetch-blogs]').append('<div class="panel" data-color="#000" data-firstline="Read" data-secondline="This"><div class="panel-content-wrapper"><div class="panel-image"><a class="ajax-link" href="/" data-type="page-transition" ><img src="' + value.attributes.cover.data.attributes.url + '?tr=w-512,h-512" alt="' + value.attributes.cover.data.attributes.alternativeText + '" /></a></div><div class="panel-content"><div class="entry-meta entry-categories"><ul class="post-categories"><li class="link"><a href="#"><span data-hover="' + value.attributes.author.data.attributes.name + '">' + value.attributes.author.data.attributes.name + '</span></a></li><li class="link"><a href="#"><span data-hover="' + postDate + '">' + postDate + '</span></a></li></ul></div><div class="news-panel-title"><span>' + value.attributes.title + '</span></div></div></div></div>');
+
+				});
+
+			}
+
+		})
+		.catch(function (error) {
+		// handle error
+			console.log(error);
+		})
+		.then(function () {
+		// always executed
+		});
+
+	}
 
 /*--------------------------------------------------
 Function Page Load
