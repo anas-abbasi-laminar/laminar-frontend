@@ -12,7 +12,15 @@
             <!-- Content Scroll -->
             <div id="content-scroll">
             
-                @@include('@@page.url')
+                @@include('@@page.url', {
+                    "post": {
+                        "id": "@@post.id",
+                        "author_name": "@@post.author_name",
+                        "title": "@@post.title",
+                        "excerpt": "@@post.excerpt",
+                        "cover": "@@post.cover"
+                    }
+                })
 
                 @@include('globals/_bottom_navigation.html')
         

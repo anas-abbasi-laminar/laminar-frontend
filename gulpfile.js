@@ -6,7 +6,7 @@ const merge = require('merge-stream');
 
 // HTML processing
 gulp.task('html', function () {
-    return gulp.src(['./src/*.html', '!./src/**/_*.html'])
+    return gulp.src(['./src/*.html', './src/**/*.html', '!./src/**/_*.html'])
         .pipe(fileinclude())
         .pipe(removeemptylines())
         .pipe(htmlmin({ collapseWhitespace: true }))

@@ -131,6 +131,12 @@
 		padding: 0;
 		color:#000;		
 	}
+
+	/* add */
+	.hero-title.smaller {
+		font-size: 5vw;
+		line-height: 7.5vw;
+	}
 	
 	.hero-title-wrapper {
 		margin-top:20px;
