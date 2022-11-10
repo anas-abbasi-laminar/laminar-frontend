@@ -3,11 +3,15 @@ const fileinclude = require('gulp-file-include');
 const removeemptylines = require('gulp-remove-empty-lines');
 const htmlmin = require('gulp-htmlmin');
 const merge = require('merge-stream');
+const sitemap = require('gulp-sitemap');
 
 // HTML processing
 gulp.task('html', function () {
     return gulp.src(['./src/*.html', './src/**/*.html', '!./src/**/_*.html'])
         .pipe(fileinclude())
+        .pipe(sitemap({
+            siteUrl: 'https://lamin.ar'
+        }))
         .pipe(removeemptylines())
         .pipe(htmlmin({ collapseWhitespace: true }))
         .pipe(gulp.dest('./dist/'));
