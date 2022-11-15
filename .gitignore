@@ -8,7 +8,7 @@ package-lock.json
 # track this file - .htaccess
 !src/.htaccess
 
-# track this file - ..gitignore
+# track this file - .gitignore
 !.gitignore
 
 # track gulp settings
