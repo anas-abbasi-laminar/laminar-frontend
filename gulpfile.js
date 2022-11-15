@@ -15,6 +15,15 @@ gulp.task('html', function () {
         .pipe(gulp.dest('./dist/'));
 });
 
+// move files
+gulp.task('move', function () {
+    var assets = gulp.src('./src/assets/**/*.*')
+        .pipe(gulp.dest('./dist/assets/'));
+    var settings = gulp.src(['./src/.htaccess', './src/favicon.ico', './src/icon.svg', './src/robot.txt', './src/site.webmanifest'])
+        .pipe(gulp.dest('./dist/'));
+    return merge(assets, settings);
+});
+
 // generating sitemap
 gulp.task('sitemap', function () {
     return gulp.src('./dist/**/*.html', {
@@ -27,17 +36,8 @@ gulp.task('sitemap', function () {
         .pipe(gulp.dest('./dist/'));
 });
 
-// move files
-gulp.task('move', function () {
-    var assets = gulp.src('./src/assets/**/*.*')
-        .pipe(gulp.dest('./dist/assets/'));
-    var settings = gulp.src(['./src/.htaccess', './src/favicon.ico', './src/icon.svg', './src/robot.txt', './src/site.webmanifest'])
-        .pipe(gulp.dest('./dist/'));
-    return merge(assets, settings);
-});
-
 // build package
-gulp.task('build', gulp.parallel('html', 'sitemap', 'move'));
+gulp.task('build', gulp.series('html', 'move', 'sitemap'));
 
 // watch for changes
 gulp.task('watch', function () {
