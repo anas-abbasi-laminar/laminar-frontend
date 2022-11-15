@@ -3,6 +3,8 @@ const fileinclude = require('gulp-file-include');
 const removeemptylines = require('gulp-remove-empty-lines');
 const htmlmin = require('gulp-htmlmin');
 const merge = require('merge-stream');
+const sitemap = require('gulp-sitemap');
+const replace = require('gulp-replace');
 
 // HTML processing
 gulp.task('html', function () {
@@ -10,6 +12,18 @@ gulp.task('html', function () {
         .pipe(fileinclude())
         .pipe(removeemptylines())
         .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest('./dist/'));
+});
+
+// generating sitemap
+gulp.task('sitemap', function () {
+    return gulp.src('./dist/**/*.html', {
+            read: false
+        })
+        .pipe(sitemap({
+            siteUrl: 'https://lamin.ar'
+        }))
+        .pipe(replace('.html</loc>', '</loc>'))
         .pipe(gulp.dest('./dist/'));
 });
 
@@ -23,13 +37,13 @@ gulp.task('move', function () {
 });
 
 // build package
-gulp.task('build', gulp.parallel('html', 'move'));
+gulp.task('build', gulp.parallel('html', 'sitemap', 'move'));
 
 // watch for changes
 gulp.task('watch', function () {
-    gulp.watch('./src/**/*.html', gulp.series(['html', 'move']));
-    gulp.watch('./src/assets/css/**/*.css', gulp.series(['html', 'move']));
-    gulp.watch('./src/assets/js/**/*.js', gulp.series(['html', 'move']));
+    gulp.watch('./src/**/*.html', gulp.series(['html', 'sitemap', 'move']));
+    gulp.watch('./src/assets/css/**/*.css', gulp.series(['html', 'sitemap', 'move']));
+    gulp.watch('./src/assets/js/**/*.js', gulp.series(['html', 'sitemap', 'move']));
 });
 
 // default task
