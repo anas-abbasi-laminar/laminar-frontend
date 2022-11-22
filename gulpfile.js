@@ -19,7 +19,7 @@ gulp.task('html', function () {
 gulp.task('move', function () {
     var assets = gulp.src('./src/assets/**/*.*')
         .pipe(gulp.dest('./dist/assets/'));
-    var settings = gulp.src(['./src/.htaccess', './src/favicon.ico', './src/icon.svg', './src/robot.txt', './src/site.webmanifest'])
+    var settings = gulp.src(['./src/.htaccess', './src/favicon.ico', './src/icon.svg', './src/robot.txt', './src/site.webmanifest', './src/browserconfig.xml'])
         .pipe(gulp.dest('./dist/'));
     return merge(assets, settings);
 });
