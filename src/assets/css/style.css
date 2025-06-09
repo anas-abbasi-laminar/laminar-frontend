@@ -3937,3 +3937,11 @@ nav.open {
   text-transform: uppercase;
   padding: 16px;
 }
+
+.m-0 {
+  margin: 0 !important;
+}
+
+.opacity-0-25 {
+  opacity: 0.25 !important;
+}
